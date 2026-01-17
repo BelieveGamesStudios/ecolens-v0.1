@@ -82,6 +82,88 @@ export const ecoDatabase = {
         tip: "Microplastics shed in wash. Use a Guppyfriend bag.",
         color: "#ef4444"
     },
+    // --- BOOKS / PAPER ---
+    "book": { // 'comic book' will match this too
+        name: "Book (Paper)",
+        carbon: "1-2 kg CO2",
+        rating: "B",
+        recycle: "Recyclable (Paper bin)",
+        tip: "Donate used books to libraries or friends!",
+        color: "#22c55e"
+    },
+    "envelope": {
+        name: "Paper Envelope",
+        carbon: "Low",
+        rating: "B",
+        recycle: "Recyclable",
+        tip: "Remove plastic windows before recycling.",
+        color: "#22c55e"
+    },
+    "carton": {
+        name: "Cardboard Carton",
+        carbon: "Low",
+        rating: "A",
+        recycle: "Recyclable (Flatten it)",
+        tip: "Great for reuse or recycling.",
+        color: "#22c55e"
+    },
+    "packet": {
+        name: "Paper Packet",
+        carbon: "Low",
+        rating: "B",
+        recycle: "Check lining",
+        tip: "If lined with plastic/foil, trash it.",
+        color: "#f59e0b"
+    },
+    "towel": { // 'paper towel'
+        name: "Paper Towel",
+        carbon: "Low",
+        rating: "C",
+        recycle: "Compostable (if wet/dirty)",
+        tip: "Use cloth rags for cleaning instead.",
+        color: "#f59e0b"
+    },
+    // --- METALS ---
+    "can": {
+        name: "Metal Can",
+        carbon: "170g CO2",
+        rating: "B",
+        recycle: "Infinitely Recyclable",
+        tip: "Rinse out food residue properly.",
+        color: "#3b82f6"
+    },
+    "tin": {
+        name: "Tin Container",
+        carbon: "Medium",
+        rating: "B",
+        recycle: "Recyclable",
+        tip: "Repurpose as a planter or storage.",
+        color: "#3b82f6"
+    },
+    "lighter": {
+        name: "Lighter (Metal/Plastic)",
+        carbon: "Medium",
+        rating: "F",
+        recycle: "Hazardous Waste",
+        tip: "Use matches or refillable lighters.",
+        color: "#ef4444"
+    },
+    "key": { // car keys, etc
+        name: "Metal Key",
+        carbon: "Low",
+        rating: "B",
+        recycle: "Scrap Metal",
+        tip: "Don't lose them!",
+        color: "#6b7280"
+    },
+    "buckle": {
+        name: "Metal Buckle",
+        carbon: "Low",
+        rating: "C",
+        recycle: "Scrap Metal",
+        tip: "Reuse from old belts.",
+        color: "#6b7280"
+    },
     // --- BARCODES (Mock Data) ---
     // A generic map for when we scan a barcode
     "049000028904": { // Coca Cola 12oz
