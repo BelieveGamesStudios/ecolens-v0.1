@@ -100,25 +100,6 @@ export const ecoDatabase = {
         tip: "Tap water has 0g carbon footprint!",
         color: "#ef4444"
     },
-    // --- CUSTOM MODEL CLASSES ---
-    // You need to update these based on what your Colab script printed!
-    // Example: 'O' (Organic) = 0, 'R' (Recyclable) = 1
-    "class_0": {
-        name: "Organic Waste",
-        carbon: "Low",
-        rating: "A",
-        recycle: "Compostable",
-        tip: "Great for composting!",
-        color: "#22c55e"
-    },
-    "class_1": {
-        name: "Recyclable Waste",
-        carbon: "Medium",
-        rating: "B",
-        recycle: "Recycle Bin",
-        tip: "Make sure it is clean/dry.",
-        color: "#3b82f6"
-    },
     "default": {
         name: "Unknown Object",
         carbon: "?",
