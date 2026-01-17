@@ -2,7 +2,7 @@
 
 import { Leaf, Recycle, Activity } from "lucide-react";
 
-export default function Overlay({ ecoData, scanning }) {
+export default function Overlay({ ecoData, scanning, modelLoading = false }) {
     // If no data, show scanning state
     const data = ecoData;
     const isScanning = scanning || !data;
@@ -17,16 +17,28 @@ export default function Overlay({ ecoData, scanning }) {
                     <h1 style={{ fontWeight: 800, fontSize: '1.2rem', letterSpacing: '0.5px' }}>EcoLens</h1>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: isScanning ? 'var(--accent)' : 'var(--primary)', animation: isScanning ? 'pulse 1s infinite' : 'none' }}></div>
+                    <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: modelLoading ? '#f59e0b' : (isScanning ? 'var(--accent)' : 'var(--primary)'), animation: (modelLoading || isScanning) ? 'pulse 1s infinite' : 'none' }}></div>
                     <span style={{ fontSize: '0.8rem', opacity: 0.8 }}>
-                        AI VISION
+                        {modelLoading ? 'LOADING AI...' : 'AI VISION'}
                     </span>
                 </div>
             </header>
 
             {/* Reticle / Focus Area (Center) */}
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                {isScanning && (
+                {modelLoading ? (
+                    <div style={{
+                        padding: '2rem',
+                        background: 'rgba(0, 0, 0, 0.7)',
+                        borderRadius: '16px',
+                        textAlign: 'center',
+                        border: '2px solid var(--primary)'
+                    }}>
+                        <Activity size={48} color="var(--primary)" style={{ animation: 'pulse 1.5s infinite' }} />
+                        <p style={{ marginTop: '1rem', fontSize: '1.2rem', fontWeight: 'bold' }}>Loading model.please wait ...</p>
+                        <p style={{ marginTop: '0.5rem', fontSize: '0.9rem', opacity: 0.7 }}>(approx. 2 minutes)</p>
+                    </div>
+                ) : isScanning && (
                     <div style={{
                         width: '250px',
                         height: '250px',

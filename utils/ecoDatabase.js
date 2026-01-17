@@ -50,6 +50,30 @@ export const ecoDatabase = {
         tip: "Look for bamboo or recycled plastic keyboards.",
         color: "#f59e0b"
     },
+    "earphone": { // headphones, earbuds, etc.
+        name: "Earphones/Headphones",
+        carbon: "10-15 kg CO2",
+        rating: "D",
+        recycle: "E-Waste",
+        tip: "Repair instead of replacing. E-waste recycling for broken ones.",
+        color: "#f59e0b"
+    },
+    "tablet": { // iPad, Android tablets, etc.
+        name: "Tablet Device",
+        carbon: "100-150 kg CO2",
+        rating: "C-",
+        recycle: "E-Waste / Trade-in",
+        tip: "Use for 4+ years to reduce impact. Trade-in programs available.",
+        color: "#f59e0b"
+    },
+    "fabric": { // cloth, textile
+        name: "Fabric/Textile",
+        carbon: "Medium",
+        rating: "C",
+        recycle: "Textile Recycling",
+        tip: "Donate or repurpose old fabrics. Avoid fast fashion.",
+        color: "#f59e0b"
+    },
     "shoe": {
         name: "Footwear",
         carbon: "14 kg CO2",
