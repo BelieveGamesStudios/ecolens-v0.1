@@ -8,7 +8,7 @@ import { getEcoData } from "@/utils/ecoDatabase";
 import { Eye } from "lucide-react";
 
 export default function Home() {
-  const [activeData, setActiveData] = useState(null);
+  const [activeData, setActiveData] = useState(getEcoData("default"));
   const [scanning, setScanning] = useState(true);
 
   const videoRef = useRef(null);
