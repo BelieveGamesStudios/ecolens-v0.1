@@ -3,65 +3,69 @@
 import { useState, useRef, useEffect } from "react";
 import CameraView from "@/components/CameraView";
 import Overlay from "@/components/Overlay";
-import { detectObject } from "@/utils/detector";
+// import { detectObject } from "@/utils/detector"; // Legacy MobileNet
 import { getEcoData } from "@/utils/ecoDatabase";
-import { Eye } from "lucide-react";
 
 export default function Home() {
-  const [activeData, setActiveData] = useState(getEcoData("default"));
-  const [scanning, setScanning] = useState(true);
+  const [activeData, setActiveData] = useState(null); // Init as null to show viewfinder
+  const [scanning, setScanning] = useState(false); // "scanning" now means "analyzing"
 
   const videoRef = useRef(null);
+
+  // We keep a reference to the loop just in case we need it later, or for cleanup
   const loopRef = useRef(null);
-  const lastPredictionRef = useRef(0);
 
   const handleStreamReady = (videoElement) => {
     videoRef.current = videoElement;
-    startDetectionLoop();
   };
 
-  const startDetectionLoop = () => {
-    if (loopRef.current) return;
+  const handleScan = async () => {
+    if (!videoRef.current) return;
 
-    const loop = async () => {
-      if (videoRef.current) {
-        try {
-          const now = Date.now();
-          // Throttle detection to every 500ms
-          if (now - lastPredictionRef.current > 500) {
+    setScanning(true);
 
-            const predictions = await detectObject(videoRef.current);
-            if (predictions && predictions.length > 0) {
-              const topResult = predictions[0];
-              if (topResult.probability > 0.6) {
-                setActiveData(getEcoData(topResult.className));
-                setScanning(false);
-              }
-            }
+    try {
+      // Capture frame
+      const canvas = document.createElement("canvas");
+      canvas.width = videoRef.current.videoWidth;
+      canvas.height = videoRef.current.videoHeight;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(videoRef.current, 0, 0);
 
-            lastPredictionRef.current = now;
-          }
-        } catch (e) {
-          console.error("Detection error:", e);
-        }
-      }
-      loopRef.current = requestAnimationFrame(loop);
-    };
+      const imageData = canvas.toDataURL("image/jpeg", 0.8);
 
-    loop();
+      const response = await fetch("/api/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ image: imageData }),
+      });
+
+      if (!response.ok) throw new Error("Analysis failed");
+
+      const data = await response.json();
+      setActiveData(data);
+
+    } catch (error) {
+      console.error("Scan error:", error);
+      alert("Failed to analyze object. Check API Key in .env.local");
+      // Fallback or keep previous data?
+      // Maybe show default if failed?
+      setActiveData(getEcoData("default"));
+    } finally {
+      setScanning(false);
+    }
   };
 
   useEffect(() => {
     return () => {
-      if (loopRef.current) cancelAnimationFrame(loopRef.current);
+      // Cleanup if we had any loops
     };
-  }, []); // Only run once on mount
+  }, []);
 
   return (
     <main>
       <CameraView onStreamReady={handleStreamReady} />
-      <Overlay ecoData={activeData} scanning={scanning} />
+      <Overlay ecoData={activeData} scanning={scanning} onScan={handleScan} />
     </main>
   );
 }
-
