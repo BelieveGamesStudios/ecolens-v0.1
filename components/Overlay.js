@@ -2,7 +2,7 @@
 
 import { Leaf, Recycle, Activity } from "lucide-react";
 
-export default function Overlay({ ecoData, scanning, onScan }) {
+export default function Overlay({ ecoData, scanning }) {
     // If no data, show scanning state
     const data = ecoData;
     const isScanning = scanning || !data;
@@ -78,29 +78,6 @@ export default function Overlay({ ecoData, scanning, onScan }) {
                     </div>
                 </div>
             )}
-
-            {/* Scan Button */}
-            <div style={{ position: 'absolute', bottom: '8rem', left: '50%', transform: 'translateX(-50%)', pointerEvents: 'auto' }}>
-                <button
-                    onClick={onScan}
-                    style={{
-                        background: 'var(--primary)',
-                        color: 'white',
-                        border: 'none',
-                        padding: '1rem 2rem',
-                        borderRadius: '30px',
-                        fontSize: '1.2rem',
-                        fontWeight: 'bold',
-                        boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                        cursor: 'pointer'
-                    }}
-                >
-                    {scanning ? "Analyzing..." : "Scan Object"}
-                </button>
-            </div>
         </div>
     );
 }
