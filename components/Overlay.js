@@ -2,14 +2,10 @@
 
 import { Leaf, Recycle, Activity } from "lucide-react";
 
-export default function Overlay({ ecoData, scanning, mode = 'visual' }) {
+export default function Overlay({ ecoData, scanning }) {
     // If no data, show scanning state
     const data = ecoData;
     const isScanning = scanning || !data;
-
-    // Header Color based on mode
-    let modeColor = 'var(--primary)'; // Default Green (Visual)
-    if (mode === 'custom') modeColor = '#8b5cf6'; // Purple (AI/Custom)
 
     return (
         <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 10, pointerEvents: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '1.5rem' }}>
@@ -17,14 +13,13 @@ export default function Overlay({ ecoData, scanning, mode = 'visual' }) {
             {/* Header */}
             <header className="glass-panel" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    {mode === 'custom' ? <Activity color={modeColor} /> :
-                        <Leaf color={modeColor} />}
+                    <Leaf color="var(--primary)" />
                     <h1 style={{ fontWeight: 800, fontSize: '1.2rem', letterSpacing: '0.5px' }}>EcoLens</h1>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: isScanning ? 'var(--accent)' : 'var(--primary)', animation: isScanning ? 'pulse 1s infinite' : 'none' }}></div>
                     <span style={{ fontSize: '0.8rem', opacity: 0.8 }}>
-                        {mode === 'visual' ? 'AI VISION' : 'CUSTOM MODEL'}
+                        AI VISION
                     </span>
                 </div>
             </header>
@@ -43,10 +38,10 @@ export default function Overlay({ ecoData, scanning, mode = 'visual' }) {
                         <Leaf size={48} color="rgba(255,255,255,0.5)" />
 
                         {/* Corner Markers */}
-                        <div style={{ position: 'absolute', top: -2, left: -2, width: 20, height: 20, borderTop: `4px solid ${modeColor}`, borderLeft: `4px solid ${modeColor}`, borderRadius: '4px 0 0 0' }}></div>
-                        <div style={{ position: 'absolute', top: -2, right: -2, width: 20, height: 20, borderTop: `4px solid ${modeColor}`, borderRight: `4px solid ${modeColor}`, borderRadius: '0 4px 0 0' }}></div>
-                        <div style={{ position: 'absolute', bottom: -2, left: -2, width: 20, height: 20, borderBottom: `4px solid ${modeColor}`, borderLeft: `4px solid ${modeColor}`, borderRadius: '0 0 0 4px' }}></div>
-                        <div style={{ position: 'absolute', bottom: -2, right: -2, width: 20, height: 20, borderBottom: `4px solid ${modeColor}`, borderRight: `4px solid ${modeColor}`, borderRadius: '0 0 4px 0' }}></div>
+                        <div style={{ position: 'absolute', top: -2, left: -2, width: 20, height: 20, borderTop: `4px solid var(--primary)`, borderLeft: `4px solid var(--primary)`, borderRadius: '4px 0 0 0' }}></div>
+                        <div style={{ position: 'absolute', top: -2, right: -2, width: 20, height: 20, borderTop: `4px solid var(--primary)`, borderRight: `4px solid var(--primary)`, borderRadius: '0 4px 0 0' }}></div>
+                        <div style={{ position: 'absolute', bottom: -2, left: -2, width: 20, height: 20, borderBottom: `4px solid var(--primary)`, borderLeft: `4px solid var(--primary)`, borderRadius: '0 0 0 4px' }}></div>
+                        <div style={{ position: 'absolute', bottom: -2, right: -2, width: 20, height: 20, borderBottom: `4px solid var(--primary)`, borderRight: `4px solid var(--primary)`, borderRadius: '0 0 4px 0' }}></div>
                     </div>
                 )}
             </div>
